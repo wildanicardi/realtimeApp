@@ -14,7 +14,7 @@ class LikeController extends Controller
      */
     public function index()
     {
-        //
+        return Like::all();
     }
 
     /**
