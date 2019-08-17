@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as IlluminateResponse;
 
@@ -26,7 +25,7 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Question $question)
     {
         // auth()->user()->question()->create($request->all());
         Question::create($request->all());
@@ -62,9 +61,10 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Question $question)
     {
-        //
+        $question->update($request->all());
+        return response("Updated", IlluminateResponse::HTTP_ACCEPTED);
     }
 
     /**
