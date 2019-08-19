@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Prophecy\Argument\Token\TokenInterface;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +47,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof TokenInvalidException) {
+            return response()->json(['error' => 'Token is Inavalid'], 400);
+        } elseif ($exception instanceof TokenExpiredException) {
+            return response()->json(['error' => 'token_expired'], 400);
+        } elseif ($exception instanceof JWTException) {
+            return response()->json(['error' => 'there is problem with your token'], 400);
+        }
         return parent::render($request, $exception);
     }
 }
