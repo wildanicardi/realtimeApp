@@ -8,7 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import VeeValidate from 'vee-validate'
 import Vuetify from 'vuetify'
+Vue.use(VeeValidate)
 Vue.use(Vuetify)
 
 export default new Vuetify({
@@ -37,5 +39,5 @@ import router from './Router/router.js'
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify(),
-    router
-});
+    router,
+})
