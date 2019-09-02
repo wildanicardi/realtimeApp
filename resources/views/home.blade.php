@@ -16,9 +16,6 @@
   </div>
     <script src="{{asset('js/app.js')}}"></script>
   <script>
-    new Vue({
-      el: '#app',
-    })
   </script>
 </body>
 </html>

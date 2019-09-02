@@ -1,11 +1,7 @@
 <template>
   <v-container grid-list-sm>
-    <v-form ref="form" v-model="valid" lazy-validation>
-      <v-text-field
-        v-model="email"
-        label="E-mail"
-        required
-      ></v-text-field>
+    <v-form @submit.prevent="login">
+      <v-text-field v-model="email" label="E-mail" required></v-text-field>
       <v-text-field
         label="Enter your password"
         hint="At least 8 characters"
@@ -13,7 +9,7 @@
         type="password"
         required
       ></v-text-field>
-      <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">Login</v-btn>
+      <v-btn color="success" type="submit" class="mr-4">Login</v-btn>
     </v-form>
   </v-container>
 </template>
@@ -21,7 +17,6 @@
 <script>
 export default {
   data: () => ({
-    valid: true,
     name: "",
     nameRules: [
       v => !!v || "Name is required",
@@ -35,11 +30,11 @@ export default {
   }),
 
   methods: {
-    validate() {
-      if (this.$refs.form.validate()) {
-        this.snackbar = true;
-      }
-    },
+    login(){
+        axios.post('/auth/login',form)
+            .then(res => console.log(res.data)
+            .error(error => console.log(error.response.data))
+    }
   }
 };
 </script>
