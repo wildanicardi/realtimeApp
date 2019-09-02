@@ -32,7 +32,7 @@ export default {
   methods: {
     login(){
         axios.post('/auth/login',form)
-            .then(res => console.log(res.data)
+            .then(res => console.log(res.data))
             .error(error => console.log(error.response.data))
     }
   }
