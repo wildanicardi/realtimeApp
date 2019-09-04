@@ -1,8 +1,9 @@
 <template>
   <v-container grid-list-sm>
     <v-form @submit.prevent="login">
-      <v-text-field v-model="email" label="E-mail" required></v-text-field>
+      <v-text-field v-model="form.email" label="E-mail" required></v-text-field>
       <v-text-field
+        v-model="form.password"
         label="Enter your password"
         hint="At least 8 characters"
         min="8"
@@ -17,23 +18,18 @@
 <script>
 export default {
   data: () => ({
-    name: "",
-    nameRules: [
-      v => !!v || "Name is required",
-      v => (v && v.length <= 10) || "Name must be less than 10 characters"
-    ],
-    email: "",
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-    ]
+    form: {
+      email: "",
+      password: ""
+    }
   }),
 
   methods: {
-    login(){
-        axios.post('/auth/login',form)
-            .then(res => console.log(res.data))
-            .error(error => console.log(error.response.data))
+    login() {
+      axios
+        .post("/api/auth/login", this.form)
+        .then(result => console.log(result.data))
+        .catch(err => console.log(err.response.data));
     }
   }
 };
