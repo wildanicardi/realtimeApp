@@ -13,6 +13,9 @@ import Vuetify from 'vuetify'
 Vue.use(VeeValidate)
 Vue.use(Vuetify)
 
+import User from './Helpers/User'
+window.User = User
+
 export default new Vuetify({
     icons: {
         iconfont: "mdi" // default - only for display purposes

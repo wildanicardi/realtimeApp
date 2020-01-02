@@ -1,19 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-Use App\User;
+
+use App\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-     /**
+    /**
      * Create a new AuthController instance.
      *
      * @return void
      */
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['login','signup']]);
+        $this->middleware('jwt', ['except' => ['login', 'signup']]);
     }
 
     /**
@@ -25,7 +26,7 @@ class AuthController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        if (! $token = auth()->attempt($credentials)) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -80,7 +81,8 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()->name
         ]);
     }
     public function payload()
